@@ -1,4 +1,4 @@
-import { Avatar, Typography } from "@material-tailwind/react";
+import { Avatar, Typography,Card } from "@material-tailwind/react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import {  useDispatch } from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import axios from "axios";
 import { logout, reset } from '../features/auth/authSlice'
+import { useSelector } from "react-redux";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -13,6 +14,8 @@ function Profile() {
   const [transactions, setTransactions] = useState([]);
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const { user } = useSelector((state) => state.auth);
 
   const onLogout = () => {
     dispatch(logout())
@@ -81,51 +84,93 @@ function Profile() {
 
   const token = getToken()
 
-  const user = localStorage.getItem('user')
- 
-  const userName = JSON.parse(user).name
+  const storedUser = localStorage.getItem("user");
+  const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+
+  // Extract `name` and `avatar` from localStorage or set defaults
+  const userName = user?.name || parsedUser?.name || "Guest";
+  const avatar = user?.avatar || parsedUser?.avatar || "/default-avatar.png"; // Use a default avatar if none is provided
+
+  // Calculate Total Income and Expense
+  const totalIncome = transactions
+    .filter((transaction) => transaction.type === "income")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
+
+  const totalExpense = transactions
+    .filter((transaction) => transaction.type === "expense")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
   
 
   return (
-    <div className="flex flex-col md:justify-evenly p-6 mt-10  items-center md:flex-row gap-8 border-0 ">
+    <>
+     <div className="flex flex-col md:justify-evenly p-6 mt-10  items-center md:flex-row gap-8 border-0 ">
 
 
-    <div className="flex-col items-center text-center ml-3">
+<div className="flex-col items-center text-center ml-3">
 
-    <div >
-        <Avatar
-          src="https://docs.material-tailwind.com/img/face-2.jpg"
-          alt="avatar"
-          className="w-32 h-32"
-        />
+<div >
+    <Avatar
+      src={avatar}
+      alt="avatar"
+      className="w-32 h-32"
+    />
+  </div>
+
+  <div className="mt-5">
+    <Typography
+      variant="h6"
+      className="text-3xl font-bold dark:text-blue-500"
+    >
+      {userName}
+    </Typography>
+
+    <button
+      type="button"
+      onClick={onLogout}
+      className="focus:outline-none mt-7 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+    >
+      LogOut
+    </button>
+  </div>
+
+</div>
+
+  
+
+  {/* Pie Chart */}
+  <div className="max-w-lg  ">
+    <Pie data={chartData} />
+  </div>
+
+
+</div>
+
+ {/* Total Income and Expense */}
+ <div className="flex justify-evenly mt-16 px-3 gap-5 flex-wrap mb-5">
+        <Card className="p-3 w-auto md:w-52 text-center flex-row justify-around  items-center bg-green-100 text-wrap">
+         
+       
+       
+       <h2 className="text-sm md:text-md font-semibold text-green-800 mr-2">Total Income: </h2>
+       <p className="text-2xl font-bold text-green-600">${totalIncome}</p>
+     
+        
+        </Card>
+
+        
+        <Card className="p-3 w-auto md:w-52 text-center flex-row justify-around items-center bg-red-100">
+         
+
+         <h2 className="text-sm md:text-md font-semibold text-red-800 mr-2">Total Expense: </h2>
+         <p className="text-2xl font-bold text-red-600">${totalExpense}</p>
+
+        
+          
+        </Card>
       </div>
 
-      <div className="mt-5">
-        <Typography
-          variant="h6"
-          className="text-3xl font-bold dark:text-blue-500"
-        >
-          {userName}
-        </Typography>
-
-        <button
-          type="button"
-          onClick={onLogout}
-          className="focus:outline-none mt-7 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-        >
-          LogOut
-        </button>
-      </div>
-
-    </div>
-
-      
-
-      {/* Pie Chart */}
-      <div className="max-w-lg  ">
-        <Pie data={chartData} />
-      </div>
-    </div>
+    </>
+   
   );
 }
 

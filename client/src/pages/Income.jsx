@@ -120,9 +120,9 @@ function Expenses() {
   
   const token = getToken()
 
-  return (
+  return ( 
     <>
-      <div className="text-4xl text-center font-bold">Expenses</div>
+      <div className="text-4xl text-center font-bold mt-3 ">Incomes</div>
       
   {/* Loader */}
       {loading && (
@@ -132,7 +132,7 @@ function Expenses() {
       )}
 
 {!loading && (
-        <ul className="mt-5 text-center dark:text-yellow-500 font-bold overflow-y-scroll h-96">
+        <ul className="mt-7 text-center dark:text-yellow-500 font-normal text-sm overflow-y-scroll px-6 md:font-bold  h-96">
           {filteredExpenses.map((expense) => (
             <li
               key={expense._id}

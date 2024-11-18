@@ -57,7 +57,10 @@ function Login() {
   }
 
   return (
-    <div className="h-screen w-full bg-cover bg-center flex items-center justify-center log">
+    <div 
+    className="h-screen w-full bg-cover bg-center flex items-center justify-center log"
+    style={{ backgroundImage: "url('/bg.jpg')" }}
+     >
      
       <section className=" mx-auto  border-2 border-sky-500 shadow-md shadow-cyan-200 w-80 px-4 py-4 text-center bg-zinc-950  rounded-3xl">
         <form onSubmit={onSubmit} className="py-5 mt-6">
@@ -97,7 +100,7 @@ function Login() {
           <div className="mt-4">
             <p className="font-semibold text-cyan-300 text-1xl">
               New User ?{" "}
-              <Link to="/register" className="text-green-400">
+              <Link to="/register" className="text-green-400 hover:text-green-300">
                 Sign Up
               </Link>
             </p>

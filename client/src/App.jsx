@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Stats from "./pages/Stats";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/income" element={<Income />} />
           <Route path="/expenses" element={<Expenses />} />
+          <Route path="/stats" element={<Stats />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

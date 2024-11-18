@@ -9,15 +9,21 @@ function Expenses() {
   const [showModal, setShowModal] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({ category: "", amount: "", description: "" });
+  const [formData, setFormData] = useState({
+    category: "",
+    amount: "",
+    description: "",
+  });
 
   useEffect(() => {
     const fetchTransactions = async () => {
       setLoading(true); // Start loading
       try {
-        const response = await axios.get("http://localhost:6888/expense",{ headers: {
-          'Authorization': `Bearer ${token}`
-        }},);
+        const response = await axios.get("http://localhost:6888/expense", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setTransactions(response.data);
       } catch (error) {
         console.error("Error fetching transactions:", error);
@@ -46,9 +52,11 @@ function Expenses() {
     event.stopPropagation();
     setLoading(true); // Start loading
     try {
-      await axios.delete(`http://localhost:6888/expense/${id}`,{ headers: {
-        'Authorization': `Bearer ${token}`
-      }});
+      await axios.delete(`http://localhost:6888/expense/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setTransactions((prev) => prev.filter((expense) => expense._id !== id));
       alert("Expense deleted successfully");
     } catch (error) {
@@ -75,12 +83,20 @@ function Expenses() {
     setLoading(true); // Start loading
     try {
       const updatedExpense = { ...formData, type: "expense" };
-      await axios.put(`http://localhost:6888/expense/${selectedExpense._id}`,{ headers: {
-        'Authorization': `Bearer ${token}`
-      }}, updatedExpense);
+      await axios.put(
+        `http://localhost:6888/expense/${selectedExpense._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        updatedExpense
+      );
       setTransactions((prev) =>
         prev.map((expense) =>
-          expense._id === selectedExpense._id ? { ...expense, ...updatedExpense } : expense
+          expense._id === selectedExpense._id
+            ? { ...expense, ...updatedExpense }
+            : expense
         )
       );
       alert("Expense updated successfully");
@@ -98,23 +114,20 @@ function Expenses() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  
   const getToken = () => {
-    const user = localStorage.getItem('user');  // Retrieve the user object from localStorage
+    const user = localStorage.getItem("user"); // Retrieve the user object from localStorage
     if (user) {
-      const parsedUser = JSON.parse(user);      // Parse the JSON string back into an object
-      return parsedUser.token;                  // Access the token from the parsed object
+      const parsedUser = JSON.parse(user); // Parse the JSON string back into an object
+      return parsedUser.token; // Access the token from the parsed object
     }
-    return null;  // Return null if there's no user data
+    return null; // Return null if there's no user data
   };
-  
-  
-  
-  const token = getToken()
+
+  const token = getToken();
 
   return (
     <>
-      <div className="text-4xl text-center font-bold">Expenses</div>
+      <div className="text-4xl text-center font-extrabold mt-4 ">Expenses</div>
 
       {/* Loader */}
       {loading && (
@@ -124,19 +137,27 @@ function Expenses() {
       )}
 
       {!loading && (
-        <ul className="mt-5 text-center dark:text-yellow-500 font-normal text-sm overflow-y-scroll px-2 md:font-bold  h-96">
+        <ul className="mt-7 text-center dark:text-yellow-500 font-normal text-sm overflow-y-scroll px-6 md:font-bold  h-96">
           {filteredExpenses.map((expense) => (
             <li
               key={expense._id}
               onClick={() => handleOpenModal(expense)}
-              className="flex justify-between gap-3 border-2 flex-nowrap border-gray-500 mb-3 rounded-lg w-auto px-5 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="flex justify-evenly gap-3 border-2 m-auto flex-nowrap border-gray-500 mb-3 rounded-2xl max-w-3xl px-5 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
             >
-              <p>{expense.type}</p>
-              <p>{expense.category}</p>
-              {/* <p> {expense.category.length > 5 ? `${expense.category.slice(0, 5)}...` : expense.category}</p> */}
-              <p>${expense.amount}</p>
+              <div className="basis-1/4">
+                <p>{expense.type}</p>
+              </div>
 
-              <div className="flex flex-nowrap">
+              <div className="basis-1/4">
+                <p>{expense.category}</p>
+              </div>
+              <div className="basis-1/4">
+                <p>${expense.amount}</p>
+              </div>
+
+              {/* <p> {expense.category.length > 5 ? `${expense.category.slice(0, 5)}...` : expense.category}</p> */}
+
+              <div className="flex flex-nowrap ">
                 <MdEdit
                   className="cursor-pointer  text-green-500"
                   onClick={(event) => handleEdit(expense, event)}
@@ -159,9 +180,13 @@ function Expenses() {
           <div className="bg-white dark:bg-gray-900 p-5 rounded-lg w-96">
             {isEditing ? (
               <>
-                <h2 className="text-lg font-bold mb-4 dark:text-yellow-500">Edit Expense</h2>
+                <h2 className="text-lg font-bold mb-4 dark:text-yellow-500">
+                  Edit Expense
+                </h2>
                 <form>
-                  <label className="block mb-2 dark:text-gray-200">Category:</label>
+                  <label className="block mb-2 dark:text-gray-200">
+                    Category:
+                  </label>
                   <input
                     type="text"
                     name="category"
@@ -169,7 +194,9 @@ function Expenses() {
                     onChange={handleInputChange}
                     className="w-full mb-4 p-2 border rounded dark:bg-gray-800 dark:text-gray-200"
                   />
-                  <label className="block mb-2 dark:text-gray-200">Amount:</label>
+                  <label className="block mb-2 dark:text-gray-200">
+                    Amount:
+                  </label>
                   <input
                     type="number"
                     name="amount"
@@ -177,7 +204,9 @@ function Expenses() {
                     onChange={handleInputChange}
                     className="w-full mb-4 p-2 border rounded dark:bg-gray-800 dark:text-gray-200"
                   />
-                  <label className="block mb-2 dark:text-gray-200">Description:</label>
+                  <label className="block mb-2 dark:text-gray-200">
+                    Description:
+                  </label>
                   <textarea
                     name="description"
                     value={formData.description}
@@ -194,7 +223,9 @@ function Expenses() {
               </>
             ) : (
               <>
-                <h2 className="text-lg font-bold mb-4 dark:text-yellow-500">Expense Details</h2>
+                <h2 className="text-lg font-bold mb-4 dark:text-yellow-500">
+                  Expense Details
+                </h2>
                 <p className="mb-4 text-gray-800 dark:text-gray-200">
                   {selectedExpense.description || "No description available"}
                 </p>

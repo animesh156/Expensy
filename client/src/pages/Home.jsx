@@ -49,7 +49,7 @@ function Home() {
       </div>
 
       <div>
-        <img src="./hm.png" alt="" />
+        <img src="/home.png" alt="" />
       </div>
     </div>
   );
