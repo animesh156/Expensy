@@ -91,6 +91,18 @@ http://localhost:3000
 - **Mongoose:** : *o interact with the MongoDB database.*
 
 
+  ![Screenshot (122)](https://github.com/user-attachments/assets/8a4b1d24-3536-489d-bb37-677fad843e4f)
+
+  ![Screenshot (125)](https://github.com/user-attachments/assets/b2661aab-390a-4f3e-8d9d-0a964f71a7d7)
+
+  ![Screenshot (124)](https://github.com/user-attachments/assets/981cce62-be3e-4c6f-8d88-f6b184be852c)
+  
+![Screenshot (123)](https://github.com/user-attachments/assets/24fdd0fe-9c77-45da-9974-f4399f2b5e00)
+
+
+
+
+
 
 
 
