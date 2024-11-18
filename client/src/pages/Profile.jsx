@@ -12,6 +12,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Profile() {
   const [transactions, setTransactions] = useState([]);
+  const [loading,setLoading] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -27,6 +28,7 @@ function Profile() {
 
   useEffect(() => {
     const fetchTransactions = async () => {
+      setLoading(true)
       try {
         const response = await axios.get("https://expensy-backend.vercel.app/expense",{ headers: {
           'Authorization': `Bearer ${token}`
@@ -34,6 +36,8 @@ function Profile() {
         setTransactions(response.data);
       } catch (error) {
         console.error("Error fetching transactions:", error);
+      } finally {
+        setLoading(false)
       }
     };
     fetchTransactions();
@@ -100,6 +104,13 @@ function Profile() {
     .filter((transaction) => transaction.type === "expense")
     .reduce((sum, transaction) => sum + transaction.amount, 0);
   
+    if (loading) {
+      return (
+        <div className="flex justify-center items-center h-96">
+        <div className="loader border-t-4 border-blue-500 border-solid rounded-full w-16 h-16 animate-spin"></div>
+      </div>
+      );
+    }
 
   return (
     <>

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login, reset } from "../features/auth/authSlice";
-import Spinner from "../components/Spinner";
+
 import { Link } from "react-router-dom";
 
 function Login() {
@@ -53,7 +53,9 @@ function Login() {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return (<div className="flex justify-center items-center h-96">
+    <div className="loader border-t-4 border-blue-500 border-solid rounded-full w-16 h-16 animate-spin"></div>
+  </div>)
   }
 
   return (

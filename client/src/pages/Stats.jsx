@@ -28,24 +28,34 @@ ChartJS.register(
 
 function Stats() {
   const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchTransactions = async () => {
-      const response = await axios.get("https://expensy-backend.vercel.app/expense", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTransactions(response.data.slice(-5).reverse());
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          "https://expensy-backend.vercel.app/expense",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setTransactions(response.data.slice(-5).reverse());
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchTransactions();
   }, []);
 
-  // Helper to group expenses by day
   const getDailyData = () => {
     const dailySums = {};
     transactions.forEach((transaction) => {
-      const date = new Date(transaction.date); // Ensure date exists in your API response
+      const date = new Date(transaction.date);
       const day = date.toLocaleString("default", { weekday: "long" });
       if (transaction.type === "expense") {
         dailySums[day] = (dailySums[day] || 0) + transaction.amount;
@@ -63,7 +73,7 @@ function Stats() {
           data,
           borderColor: "rgba(255, 99, 132, 1)",
           backgroundColor: "rgba(255, 99, 132, 0.2)",
-          tension: 0.4, // Smoothing lines
+          tension: 0.4,
         },
       ],
     };
@@ -72,7 +82,7 @@ function Stats() {
   const getMonthlyData = () => {
     const monthlySums = {};
     transactions.forEach((transaction) => {
-      const date = new Date(transaction.date); // Ensure date exists in your API response
+      const date = new Date(transaction.date);
       const month = date.toLocaleString("default", { month: "long" });
       if (transaction.type === "expense") {
         monthlySums[month] = (monthlySums[month] || 0) + transaction.amount;
@@ -95,28 +105,38 @@ function Stats() {
         {
           label: "Monthly Expenses",
           data,
-          backgroundColor: colors, // Use color array
+          backgroundColor: colors,
         },
       ],
     };
   };
 
   const getToken = () => {
-    const user = localStorage.getItem("user"); // Retrieve the user object from localStorage
+    const user = localStorage.getItem("user");
     if (user) {
-      const parsedUser = JSON.parse(user); // Parse the JSON string back into an object
-      return parsedUser.token; // Access the token from the parsed object
+      const parsedUser = JSON.parse(user);
+      return parsedUser.token;
     }
-    return null; // Return null if there's no user data
+    return null;
   };
 
   const token = getToken();
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-96">
+      <div className="loader border-t-4 border-blue-500 border-solid rounded-full w-16 h-16 animate-spin"></div>
+    </div>
+    );
+  }
 
   return (
     <div className="flex flex-wrap justify-center items-center h-screen gap-5 px-4 py-8">
       {/* Daily Expenses Chart */}
       <div className="w-full lg:w-1/2 xl:w-5/12 bg-white dark:bg-zinc-900 p-6 rounded-lg shadow-md">
-        <h2 className="font-bold text-lg mb-4 text-center dark:text-cyan-400">Daily Expenses</h2>
+        <h2 className="font-bold text-lg mb-4 text-center dark:text-cyan-400">
+          Daily Expenses
+        </h2>
         <div className="aspect-w-16 aspect-h-9">
           <Line data={getDailyData()} options={{ responsive: true }} />
         </div>
@@ -124,7 +144,9 @@ function Stats() {
 
       {/* Monthly Expenses Chart */}
       <div className="w-full lg:w-1/2 xl:w-5/12 bg-white dark:bg-zinc-900 p-6 rounded-lg shadow-md">
-        <h2 className="font-bold text-lg mb-4 text-center dark:text-cyan-400">Monthly Expenses</h2>
+        <h2 className="font-bold text-lg mb-4 text-center dark:text-cyan-400">
+          Monthly Expenses
+        </h2>
         <div className="aspect-w-16 aspect-h-9 ">
           <Bar data={getMonthlyData()} options={{ responsive: true }} />
         </div>

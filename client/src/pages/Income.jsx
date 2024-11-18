@@ -10,7 +10,7 @@ function Expenses() {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({ category: "", amount: "", description: "" });
   const [loading, setLoading] = useState(false); // Loader state
-
+ 
   useEffect(() => {
     const fetchTransactions = async () => {
       setLoading(true); // Start loading

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { register, reset } from '../features/auth/authSlice';
-import Spinner from '../components/Spinner';
+
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -64,7 +64,11 @@ function Register() {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <div className="flex justify-center items-center h-96">
+        <div className="loader border-t-4 border-blue-500 border-solid rounded-full w-16 h-16 animate-spin"></div>
+      </div>
+    )
   }
 
   return (
