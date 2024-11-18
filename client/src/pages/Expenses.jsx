@@ -127,7 +127,7 @@ function Expenses() {
 
   return (
     <>
-      <div className="text-4xl text-center font-extrabold mt-4 ">Expenses</div>
+      <div className="text-4xl text-center font-extrabold mt-2 ">Expenses</div>
 
       {/* Loader */}
       {loading && (

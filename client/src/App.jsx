@@ -29,7 +29,7 @@ function App() {
       )}
 
       {/* Main Content */}
-      <div className={`${!isAuthPage ? "md:col-span-10 col-span-9" : "w-full"}`}>
+      <div className={`${!isAuthPage ? "md:col-span-10 col-span-12" : "w-full"}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<DashBoard />} />

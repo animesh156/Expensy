@@ -114,7 +114,7 @@ function Profile() {
 
   return (
     <>
-     <div className="flex flex-col md:justify-evenly p-6 mt-10  items-center md:flex-row gap-8 border-0 ">
+     <div className="flex flex-col md:justify-evenly p-5 mt-3   items-center md:flex-row gap-8 border-0 ">
 
 
 <div className="flex-col items-center text-center ml-3">
