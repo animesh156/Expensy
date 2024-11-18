@@ -127,7 +127,7 @@ function Expenses() {
 
   return (
     <>
-      <div className="text-4xl text-center font-extrabold mt-2 ">Expenses</div>
+      <div className="text-4xl text-center font-extrabold mt-2 dark:text-pink-400">Expenses</div>
 
       {/* Loader */}
       {loading && (
@@ -137,7 +137,7 @@ function Expenses() {
       )}
 
       {!loading && (
-        <ul className="mt-7 text-center dark:text-yellow-500 font-normal text-sm overflow-y-scroll px-6 md:font-bold  h-96">
+        <ul className="mt-7 text-center dark:text-sky-400 font-normal text-sm overflow-y-scroll px-6 md:font-bold  h-96">
           {filteredExpenses.map((expense) => (
             <li
               key={expense._id}

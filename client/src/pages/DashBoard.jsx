@@ -93,12 +93,12 @@ function DashBoard() {
         <div className="px-3 flex h-screen items-center flex-col">
           {/* Recent Expenses Card */}
         
-            <Card className="w-full  m-auto md:max-w-lg h-56 dark:bg-zinc-900 ">
-              <h1 className="text-center font-extrabold dark:text-sky-500 border-b border-white">
+            <Card className="w-full  m-auto md:max-w-lg  dark:bg-zinc-900 ">
+              <h1 className="text-center mb-3 font-extrabold dark:text-sky-500 border-b border-white">
                 Recent Expenses
               </h1>
               <List className="dark:text-red-500 text-sm font-bold text-center">
-                <ListItem className="flex justify-evenly  -mt-4 dark:text-yellow-400">
+                <ListItem className="flex justify-between -mt-4 text-md font-extrabold text-center dark:text-deep-purple-400">
                   <div className="basis-1/4">
                     <p>Category</p>
                   </div>
@@ -139,8 +139,8 @@ function DashBoard() {
           {/* Modal */}
           {showModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
-              <div className="bg-white rounded-lg p-5 w-11/12 sm:w-96">
-                <h2 className="text-lg font-bold mb-4">Add New Expense</h2>
+              <div className="bg-neutral-900 rounded-lg p-5 w-11/12 sm:w-96">
+                <h2 className="text-md font-extrabold mb-4 text-center dark:text-blue-500">Add New Expense</h2>
                 <form
                   onSubmit={handleSubmit}
                   className="flex items-center flex-col"
@@ -150,27 +150,27 @@ function DashBoard() {
                     placeholder="Amount"
                     value={form.amount}
                     onChange={handleChange}
-                    className="border-2 mb-3 w-full px-2 py-1 border-gray-300 rounded-md"
+                    className="py-3 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-3xl  bg-black caret-yellow-500 text-rose-500 mb-8"
                   />
                   <input
                     name="category"
                     placeholder="Category"
                     value={form.category}
                     onChange={handleChange}
-                    className="border-2 mb-3 w-full px-2 py-1 border-gray-300 rounded-md"
+                    className="py-3 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-3xl  bg-black caret-yellow-500 text-rose-500 mb-8"
                   />
                   <input
                     name="description"
                     placeholder="Description"
                     value={form.description}
                     onChange={handleChange}
-                    className="border-2 mb-3 w-full px-2 py-1 border-gray-300 rounded-md"
+                    className="py-3 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-3xl  bg-black caret-yellow-500 text-rose-500 mb-8"
                   />
                   <select
                     name="type"
                     value={form.type}
                     onChange={handleChange}
-                    className="border-2 mb-3 w-full px-2 py-1 border-gray-300 rounded-md"
+                    className="py-2.5 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-3xl  bg-black caret-yellow-500 text-rose-500 mb-8"
                   >
                     <option value="expense">Expense</option>
                     <option value="income">Income</option>
@@ -178,14 +178,14 @@ function DashBoard() {
                   <div className="flex space-x-3">
                     <button
                       type="submit"
-                      className="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md"
+                      className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                     >
                       Save
                     </button>
                     <button
                       type="button"
                       onClick={() => setShowModal(false)}
-                      className="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md"
+                      className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                     >
                       Cancel
                     </button>
