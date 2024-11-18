@@ -31,7 +31,7 @@ function Stats() {
 
   useEffect(() => {
     const fetchTransactions = async () => {
-      const response = await axios.get("http://localhost:6888/expense", {
+      const response = await axios.get("https://expensy-backend.vercel.app/expense", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

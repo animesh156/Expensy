@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const registerRoute = "http://localhost:6888/user/register"
+const registerRoute = "https://expensy-backend.vercel.app/user/register"
 
-const loginRoute =    "http://localhost:6888/user/login"
+const loginRoute =    "https://expensy-backend.vercel.app/user/login"
 
 
 // Register user

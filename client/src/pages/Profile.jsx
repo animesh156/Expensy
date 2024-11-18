@@ -28,7 +28,7 @@ function Profile() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get("http://localhost:6888/expense",{ headers: {
+        const response = await axios.get("https://expensy-backend.vercel.app/expense",{ headers: {
           'Authorization': `Bearer ${token}`
         }});
         setTransactions(response.data);

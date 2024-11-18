@@ -19,7 +19,7 @@ function Expenses() {
     const fetchTransactions = async () => {
       setLoading(true); // Start loading
       try {
-        const response = await axios.get("http://localhost:6888/expense", {
+        const response = await axios.get("https://expensy-backend.vercel.app/expense", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -52,7 +52,7 @@ function Expenses() {
     event.stopPropagation();
     setLoading(true); // Start loading
     try {
-      await axios.delete(`http://localhost:6888/expense/${id}`, {
+      await axios.delete(`https://expensy-backend.vercel.app/expense/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -84,7 +84,7 @@ function Expenses() {
     try {
       const updatedExpense = { ...formData, type: "expense" };
       await axios.put(
-        `http://localhost:6888/expense/${selectedExpense._id}`,
+        `https://expensy-backend.vercel.app/expense/${selectedExpense._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
