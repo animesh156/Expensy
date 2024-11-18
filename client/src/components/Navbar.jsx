@@ -17,7 +17,7 @@ function Navbar() {
   return (
     <>
       {user || parsedUser ? ( // Render Navbar only if a user is logged in
-        <div className="flex-col bg-gray-300 text-center w-fit md:w-auto dark:bg-zinc-900 h-full">
+        <div className="flex-col bg-gray-300 text-center w-full md:w-auto dark:bg-zinc-900 h-full">
           <div>
             <Avatar
               src={avatar} // Use the avatar from localStorage or Redux

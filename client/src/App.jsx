@@ -23,13 +23,13 @@ function App() {
     <div className={`grid ${!isAuthPage ? "grid-cols-12" : ""} h-screen`}>
       {/* Navbar - spans 2 columns for non-auth pages */}
       {!isAuthPage && user && (
-        <div className="col-span-2">
+        <div className="md:col-span-2 col-span-3">
           <Navbar />
         </div>
       )}
 
       {/* Main Content */}
-      <div className={`${!isAuthPage ? "col-span-10" : "w-full"}`}>
+      <div className={`${!isAuthPage ? "md:col-span-10 col-span-9" : "w-full"}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<DashBoard />} />
