@@ -1,4 +1,4 @@
-import { Avatar, Typography,Card } from "@material-tailwind/react";
+import { Avatar, Typography } from "@material-tailwind/react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useEffect, useState } from "react";
@@ -95,14 +95,7 @@ function Profile() {
   const userName = user?.name || parsedUser?.name || "Guest";
   const avatar = user?.avatar || parsedUser?.avatar || "/default-avatar.png"; // Use a default avatar if none is provided
 
-  // Calculate Total Income and Expense
-  const totalIncome = transactions
-    .filter((transaction) => transaction.type === "income")
-    .reduce((sum, transaction) => sum + transaction.amount, 0);
-
-  const totalExpense = transactions
-    .filter((transaction) => transaction.type === "expense")
-    .reduce((sum, transaction) => sum + transaction.amount, 0);
+  
   
     if (loading) {
       return (
@@ -130,7 +123,7 @@ function Profile() {
   <div className="mt-5">
     <Typography
       variant="h6"
-      className="text-3xl font-bold dark:text-blue-500"
+      className="text-3xl font-extrabold dark:text-blue-500"
     >
       {userName}
     </Typography>
@@ -149,36 +142,28 @@ function Profile() {
   
 
   {/* Pie Chart */}
-  <div className="max-w-lg  ">
-    <Pie data={chartData} />
+  <div className="flex flex-col items-center gap-y-4">
+
+  <div className="max-w-lg mt-3 ">
+  <Pie data={chartData} />
   </div>
+
+  <div>
+
+  <p className="text-lg font-extrabold text-pink-500">Financial Overview</p>
+
+  </div>
+    
+  </div>
+
+   
+  
 
 
 </div>
 
- {/* Total Income and Expense */}
- <div className="flex justify-evenly mt-16 px-3 gap-5 flex-wrap mb-5">
-        <Card className="p-3 w-auto md:w-52 text-center flex-row justify-around  items-center bg-green-100 text-wrap">
-         
-       
-       
-       <h2 className="text-sm md:text-md font-semibold text-green-800 mr-2">Total Income: </h2>
-       <p className="text-2xl font-bold text-green-600">${totalIncome}</p>
-     
-        
-        </Card>
 
-        
-        <Card className="p-3 w-auto md:w-52 text-center flex-row justify-around items-center bg-red-100">
-         
-
-         <h2 className="text-sm md:text-md font-semibold text-red-800 mr-2">Total Expense: </h2>
-         <p className="text-2xl font-bold text-red-600">${totalExpense}</p>
-
-        
-          
-        </Card>
-      </div>
+ 
 
     </>
    

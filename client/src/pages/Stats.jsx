@@ -133,17 +133,17 @@ function Stats() {
   return (
     <div className="flex flex-wrap justify-center items-center h-screen gap-5 px-4 py-8">
       {/* Daily Expenses Chart */}
-      <div className="w-full lg:w-1/2 xl:w-5/12 bg-white dark:bg-zinc-900 p-6 rounded-lg shadow-md">
+      <div className="w-full lg:w-1/2 xl:w-5/12 bg-white dark:bg-zinc-950 p-6 rounded-lg shadow-md">
         <h2 className="font-bold text-lg mb-4 text-center dark:text-cyan-400">
           Daily Expenses
         </h2>
-        <div className="aspect-w-16 aspect-h-9">
+        <div className="aspect-w-16 aspect-h-9 ">
           <Line data={getDailyData()} options={{ responsive: true }} />
         </div>
       </div>
 
       {/* Monthly Expenses Chart */}
-      <div className="w-full lg:w-1/2 xl:w-5/12 bg-white dark:bg-zinc-900 p-6 rounded-lg shadow-md">
+      <div className="w-full lg:w-1/2 xl:w-5/12 bg-white dark:bg-zinc-950 p-6 rounded-lg shadow-md">
         <h2 className="font-bold text-lg mb-4 text-center dark:text-cyan-400">
           Monthly Expenses
         </h2>

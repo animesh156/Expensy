@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
+import { IoHomeOutline } from "react-icons/io5";
+import { CiCreditCard1 } from "react-icons/ci";
+import { MdOutlinePayments } from "react-icons/md";
+import { IoIosStats } from "react-icons/io";
+import { CgProfile } from "react-icons/cg";
 
 function Navbar() {
   // State to manage sidebar visibility
@@ -22,7 +27,7 @@ function Navbar() {
   return (
     <>
       {/* Hamburger Menu */}
-      <div className="flex items-center justify-between w-12 py-3 text-center bg-gray-300 dark:bg-zinc-900">
+      <div className="flex items-center justify-between w-12 py-3 text-center bg-gray-300 dark:bg-zinc-950">
         <button
           className="md:hidden text-gray-700 m-auto dark:text-teal-500 focus:outline-none"
           onClick={() => setSidebarOpen(!isSidebarOpen)} // Toggle the sidebar open/close
@@ -37,9 +42,9 @@ function Navbar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 z-50 w-64 h-full bg-gray-300 dark:bg-zinc-900 p-6 transform ${
+        className={`fixed top-0 left-0 z-50  h-full bg-gray-300 dark:bg-zinc-950 p-6 transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 md:translate-x-0 md:w-auto`}
+        } transition-transform duration-300 md:translate-x-0 w-auto md:w-40  xl:w-52 `}
       >
         {/* Close Button Inside Sidebar */}
         <button
@@ -62,30 +67,30 @@ function Navbar() {
 
 
         <div>
-          <ul className="space-y-4 mt-8 dark:text-teal-500">
+          <ul className="space-y-6 mt-8 dark:text-gray-400">
             <Link to="/dashboard" onClick={() => setSidebarOpen(false)}>
-              <li className="hover:bg-gray-200 py-2 px-4 rounded font-bold cursor-pointer">
-                Home
+              <li className="hover:text-blue-500 flex items-center gap-x-2 py-2 px-4 rounded font-bold text-sm cursor-pointer">
+              <IoHomeOutline size={18} />  Home
               </li>
             </Link>
             <Link to="/income" onClick={() => setSidebarOpen(false)}>
-              <li className="hover:bg-gray-200 py-2 px-4 rounded font-bold cursor-pointer">
-                Income
+              <li className="hover:text-blue-500 flex items-center gap-x-2 py-2 px-4 rounded font-bold text-sm cursor-pointer">
+               <CiCreditCard1 size={18} /> Income
               </li>
             </Link>
             <Link to="/expenses" onClick={() => setSidebarOpen(false)}>
-              <li className="hover:bg-gray-200 py-2 px-4 rounded font-bold cursor-pointer">
-                Expense
+              <li className="hover:text-blue-500 flex items-center gap-x-2 py-2 px-4 rounded font-bold text-sm cursor-pointer">
+               <MdOutlinePayments size={18} /> Expense
               </li>
             </Link>
             <Link to="/stats" onClick={() => setSidebarOpen(false)}>
-              <li className="hover:bg-gray-200 py-2 px-4 rounded font-bold cursor-pointer">
-                Stats
+              <li className="hover:text-blue-500 py-2 flex items-center gap-x-2 px-4 rounded font-bold text-sm cursor-pointer">
+              <IoIosStats size={18}/>  Stats
               </li>
             </Link>
             <Link to="/profile" onClick={() => setSidebarOpen(false)}>
-              <li className="hover:bg-gray-200 py-2 px-4 font-bold rounded cursor-pointer">
-                Profile
+              <li className="hover:text-blue-500 flex items-center gap-x-2 py-2 px-4 font-semibold text-sm rounded cursor-pointer">
+              <CgProfile size={18}/>  Profile
               </li>
             </Link>
           </ul>
@@ -95,7 +100,7 @@ function Navbar() {
       {/* Overlay for Sidebar */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50 md:hidden"
+          className="fixed inset-0 dark:bg-zinc-950 opacity-50 md:hidden"
           onClick={() => setSidebarOpen(false)} // Close the sidebar when clicking the overlay
         ></div>
       )}

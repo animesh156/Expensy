@@ -136,43 +136,49 @@ function Expenses() {
         </div>
       )}
 
+      {}
+
       {!loading && (
-        <ul className="mt-7 text-center dark:text-sky-400 font-normal text-sm overflow-y-scroll px-6 md:font-bold  h-96">
-          {filteredExpenses.map((expense) => (
-            <li
-              key={expense._id}
-              onClick={() => handleOpenModal(expense)}
-              className="flex justify-evenly gap-3 border-2 m-auto flex-nowrap border-gray-500 mb-3 rounded-2xl max-w-3xl px-5 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
-            >
-              <div className="basis-1/4">
-                <p>{expense.type}</p>
-              </div>
-
-              <div className="basis-1/4">
-                <p>{expense.category}</p>
-              </div>
-              <div className="basis-1/4">
-                <p>${expense.amount}</p>
-              </div>
-
-              {/* <p> {expense.category.length > 5 ? `${expense.category.slice(0, 5)}...` : expense.category}</p> */}
-
-              <div className="flex flex-nowrap ">
-                <MdEdit
-                  className="cursor-pointer  text-green-500"
-                  onClick={(event) => handleEdit(expense, event)}
-                  size={22}
-                />
-                <MdDelete
-                  className="cursor-pointer text-red-500"
-                  onClick={(event) => handleDelete(expense._id, event)}
-                  size={22}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+  <div className="mt-7 text-center dark:text-sky-400 font-normal text-sm overflow-y-scroll px-6 md:font-bold h-96">
+    {filteredExpenses.length === 0 ? (
+      <p className="dark:text-red-500 font-bold text-xl">
+        No data to be displayed
+      </p>
+    ) : (
+      <ul>
+        {filteredExpenses.map((expense) => (
+          <li
+            key={expense._id}
+            onClick={() => handleOpenModal(expense)}
+            className="flex justify-evenly gap-3 border-2 m-auto flex-nowrap border-gray-500 mb-3 rounded-2xl max-w-3xl px-5 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-800 dark:bg-zinc-950"
+          >
+            <div className="basis-1/4">
+              <p>{expense.type}</p>
+            </div>
+            <div className="basis-1/4">
+              <p>{expense.category}</p>
+            </div>
+            <div className="basis-1/4">
+              <p>${expense.amount}</p>
+            </div>
+            <div className="flex flex-nowrap">
+              <MdEdit
+                className="cursor-pointer text-green-500"
+                onClick={(event) => handleEdit(expense, event)}
+                size={22}
+              />
+              <MdDelete
+                className="cursor-pointer text-red-500"
+                onClick={(event) => handleDelete(expense._id, event)}
+                size={22}
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+)}
 
       {/* Modal */}
       {showModal && (
