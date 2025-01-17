@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 import { register, reset } from '../features/auth/authSlice';
 
@@ -27,11 +27,12 @@ function Register() {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      
       toast.error(message);
     }
 
     if (isSuccess || user) {
+      toast.success('User registered successfully')
       navigate('/dashboard');
     }
 
@@ -76,6 +77,7 @@ function Register() {
       className="h-screen w-full bg-cover bg-center flex items-center justify-center log"
       style={{ backgroundImage: "url('/bg.jpg')" }}
     >
+      <ToastContainer />
       <section className="mx-auto border-2 border-sky-500 shadow-md shadow-cyan-200 w-80 px-4 py-6 text-center bg-zinc-950 rounded-3xl">
         <form onSubmit={onSubmit}>
           <div>

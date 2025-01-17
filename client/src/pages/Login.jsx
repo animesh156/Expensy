@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { login, reset } from "../features/auth/authSlice";
 
 import { Link } from "react-router-dom";
@@ -24,10 +24,11 @@ function Login() {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error('Invalid Credentials');
     }
 
     if (isSuccess || user) {
+      toast.success('User Logged in Successfully')
       navigate("/dashboard");
     }
 
@@ -63,6 +64,8 @@ function Login() {
     className="h-screen w-full bg-cover bg-center flex items-center justify-center log"
     style={{ backgroundImage: "url('/bg.jpg')" }}
      >
+
+      <ToastContainer />
      
       <section className=" mx-auto  border-2 border-sky-500 shadow-md shadow-cyan-200 w-80 px-4 py-4 text-center bg-zinc-950  rounded-3xl">
         <form onSubmit={onSubmit} className="py-5 mt-6">

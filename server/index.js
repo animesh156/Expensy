@@ -18,4 +18,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/expense',protect, expenseRoute)
 app.use('/user', userRoute)
 
-app.listen(port)
+app.listen(port, () => {
+    console.log(`Server started at ${port}`)
+})

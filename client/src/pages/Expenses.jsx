@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import {toast, ToastContainer} from 'react-toastify'
 
 function Expenses() {
   const [transactions, setTransactions] = useState([]);
@@ -58,10 +60,10 @@ function Expenses() {
         },
       });
       setTransactions((prev) => prev.filter((expense) => expense._id !== id));
-      alert("Expense deleted successfully");
+     toast.success('Expense deleted successfully')
     } catch (error) {
-      alert("Expense was not deleted");
-      console.error("Error deleting expense:", error);
+      toast.error("Expense was not deleted");
+     
     } finally {
       setLoading(false); // Stop loading
     }
@@ -99,11 +101,11 @@ function Expenses() {
             : expense
         )
       );
-      alert("Expense updated successfully");
+     toast.success("Expense updated successfully");
       handleCloseModal();
     } catch (error) {
-      alert("Failed to update expense");
-      console.error("Error updating expense:", error);
+      toast.error("Failed to update expense");
+     
     } finally {
       setLoading(false); // Stop loading
     }
@@ -127,6 +129,7 @@ function Expenses() {
 
   return (
     <>
+    <ToastContainer />
       <div className="text-4xl text-center font-extrabold mt-2 dark:text-pink-400">Expenses</div>
 
       {/* Loader */}

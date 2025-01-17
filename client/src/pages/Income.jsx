@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import {toast, ToastContainer} from 'react-toastify'
 
 function Expenses() {
   const [transactions, setTransactions] = useState([]);
@@ -52,9 +53,9 @@ function Expenses() {
         'Authorization': `Bearer ${token}`
       }},);
       setTransactions((prev) => prev.filter((expense) => expense._id !== id));
-      alert("Expense deleted successfully");
+      toast.success("Expense deleted successfully");
     } catch (error) {
-      alert("Expense was not deleted");
+      toast.error("Expense was not deleted");
       console.error("Error deleting expense:", error);
     } finally{
       setLoading(false)
@@ -90,10 +91,10 @@ function Expenses() {
         )
       );
   
-      alert("Expense updated successfully");
+     toast.success("Expense updated successfully");
       handleCloseModal();
     } catch (error) {
-      alert("Failed to update expense");
+      toast.error("Failed to update expense");
       console.error("Error updating expense:", error);
     } finally {
       setLoading(false)
@@ -122,6 +123,7 @@ function Expenses() {
 
   return ( 
     <>
+    <ToastContainer />
       <div className="text-4xl text-center font-extrabold  mt-3 dark:text-pink-400 ">Incomes</div>
       
   {/* Loader */}

@@ -3,6 +3,7 @@ import axios from "axios";
 import { List, ListItem, Card } from "@material-tailwind/react";
 import { BsGraphUpArrow, BsGraphDownArrow } from "react-icons/bs";
 import { MdAccountBalance } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
 
 function DashBoard() {
   const [transactions, setTransactions] = useState([]);
@@ -66,8 +67,10 @@ function DashBoard() {
       );
       setTransactions([response.data, ...transactions].slice(0, 5));
       setForm({ amount: "", category: "", description: "", type: "expense" });
+      toast.success('Expense added successfully')
       setShowModal(false);
     } catch (error) {
+      toast.error('Error adding expense')
       console.error("Error adding transaction:", error);
     }
   };
@@ -83,6 +86,7 @@ function DashBoard() {
 
   return (
     <div>
+      <ToastContainer />
       {/* Loader */}
       {loading && (
         <div className="flex justify-center  items-center h-screen">
