@@ -5,7 +5,8 @@ const app = express();
 const expenseRoute = require('./routes/expenseRoute')
 const userRoute = require('./routes/userRoute')
 const connectDB = require('./config/db')
-const {protect} = require('./middleware/authMiddleware')
+const {protect}  = require('./middleware/authMiddleware')
+
 
 const port = process.env.PORT
 

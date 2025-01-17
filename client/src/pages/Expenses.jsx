@@ -71,6 +71,7 @@ function Expenses() {
 
   const handleEdit = (expense, event) => {
     event.stopPropagation();
+
     setFormData({
       category: expense.category,
       amount: expense.amount,
@@ -84,15 +85,16 @@ function Expenses() {
   const handleUpdate = async () => {
     setLoading(true); // Start loading
     try {
-      const updatedExpense = { ...formData, type: "expense" };
+      const updatedExpense = { ...formData, type: selectedExpense.type };
+      console.log(selectedExpense)
       await axios.put(
         `https://expensy-backend.vercel.app/expense/${selectedExpense._id}`,
+        updatedExpense, // Body
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
-        updatedExpense
+        }
       );
       setTransactions((prev) =>
         prev.map((expense) =>
@@ -130,7 +132,7 @@ function Expenses() {
   return (
     <>
     <ToastContainer />
-      <div className="text-4xl text-center font-extrabold mt-2 dark:text-pink-400">Expenses</div>
+      <div className="text-6xl text-center font-extrabold mt-2 mb-3 dark:text-pink-400">Expenses</div>
 
       {/* Loader */}
       {loading && (
@@ -153,7 +155,7 @@ function Expenses() {
           <li
             key={expense._id}
             onClick={() => handleOpenModal(expense)}
-            className="flex justify-evenly gap-3 border-2 m-auto flex-nowrap border-gray-500 mb-3 rounded-2xl max-w-3xl px-5 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-800 dark:bg-zinc-950"
+            className="flex justify-evenly gap-3 border-2 m-auto flex-nowrap border-gray-500 mb-3 rounded-2xl max-w-3xl px-5 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-900 dark:bg-zinc-950"
           >
             <div className="basis-1/4">
               <p>{expense.type}</p>
@@ -164,14 +166,14 @@ function Expenses() {
             <div className="basis-1/4">
               <p>${expense.amount}</p>
             </div>
-            <div className="flex flex-nowrap">
+            <div className="flex flex-nowrap gap-x-3">
               <MdEdit
-                className="cursor-pointer text-green-500"
+                className="cursor-pointer text-green-500 hover:text-green-800"
                 onClick={(event) => handleEdit(expense, event)}
                 size={22}
               />
               <MdDelete
-                className="cursor-pointer text-red-500"
+                className="cursor-pointer text-red-500 hover:text-red-800"
                 onClick={(event) => handleDelete(expense._id, event)}
                 size={22}
               />

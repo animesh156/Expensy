@@ -82,9 +82,15 @@ function Expenses() {
     setLoading(true)
     try {
       const updatedExpense = { ...formData, type: selectedExpense.type }; // Keep the original type
-      await axios.put(`https://expensy-backend.vercel.app/expense/${selectedExpense._id}`,{ headers: {
-        'Authorization': `Bearer ${token}`
-      }}, updatedExpense);
+      await axios.put(
+        `https://expensy-backend.vercel.app/expense/${selectedExpense._id}`,
+        updatedExpense, // Body
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setTransactions((prev) =>
         prev.map((expense) =>
           expense._id === selectedExpense._id ? { ...expense, ...updatedExpense } : expense

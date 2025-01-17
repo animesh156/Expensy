@@ -140,21 +140,25 @@ function Profile() {
 </div>
 
   
+{transactions.length !== 0 ? (
+  <section className="flex flex-col items-center gap-y-4">
+    {/* Pie Chart Container */}
+    <div className="max-w-lg mt-3">
+      <Pie data={chartData} />
+    </div>
+
+    {/* Chart Title */}
+    <div>
+      <p className="text-lg font-extrabold text-pink-500">Financial Overview</p>
+    </div>
+  </section>
+) : (
+  <h4 className="text-gray-500 text-center text-2xl font-bold mt-6">No data available</h4>
+)}
+
 
   {/* Pie Chart */}
-  <div className="flex flex-col items-center gap-y-4">
 
-  <div className="max-w-lg mt-3 ">
-  <Pie data={chartData} />
-  </div>
-
-  <div>
-
-  <p className="text-lg font-extrabold text-pink-500">Financial Overview</p>
-
-  </div>
-    
-  </div>
 
    
   

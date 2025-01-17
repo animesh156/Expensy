@@ -214,7 +214,7 @@ function DashBoard() {
           {showModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
               <div className="bg-neutral-900 rounded-lg p-5 w-11/12 sm:w-96">
-                <h2 className="text-md font-extrabold mb-4 text-center dark:text-blue-500">
+                <h2 className="text-md font-extrabold mb-4 text-center text-sky-500">
                   Add New Expense
                 </h2>
                 <form
@@ -226,27 +226,27 @@ function DashBoard() {
                     placeholder="Amount"
                     value={form.amount}
                     onChange={handleChange}
-                    className="py-3 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-3xl  bg-black caret-yellow-500 text-rose-500 mb-8"
+                    className="py-2.5 px-3 md:w-72 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-lg  bg-black caret-yellow-500 text-rose-500 mb-8"
                   />
                   <input
                     name="category"
                     placeholder="Category"
                     value={form.category}
                     onChange={handleChange}
-                    className="py-3 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-3xl  bg-black caret-yellow-500 text-rose-500 mb-8"
+                    className="py-2.5 px-3 md:w-72 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-lg  bg-black caret-yellow-500 text-rose-500 mb-8"
                   />
-                  <input
+                  <textarea
                     name="description"
                     placeholder="Description"
                     value={form.description}
                     onChange={handleChange}
-                    className="py-3 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-3xl  bg-black caret-yellow-500 text-rose-500 mb-8"
+                    className="py-2.5 md:w-72 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-lg  bg-black caret-yellow-500 text-rose-500 mb-8"
                   />
                   <select
                     name="type"
                     value={form.type}
                     onChange={handleChange}
-                    className="py-2.5 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-3xl  bg-black caret-yellow-500 text-rose-500 mb-8"
+                    className="py-2.5 px-3 border-2 border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-lg  bg-black caret-yellow-500 text-rose-500 mb-8"
                   >
                     <option value="expense">Expense</option>
                     <option value="income">Income</option>

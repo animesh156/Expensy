@@ -61,7 +61,8 @@ const updateExpense = async (req, res) => {
   if (!req.user) {
     res.status(401);
     throw new Error("User not found");
-  }
+  }  
+  console.log(req.user)
   //    make sure logged in user matches goal user
   if (expense.user.toString() !== req.user.id) {
     res.status(401);
